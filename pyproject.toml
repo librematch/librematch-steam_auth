@@ -1,0 +1,32 @@
+[tool.poetry]
+name = "librematch_steam_auth"
+version = "0.1.0"
+description = "Steam authentication proxy for use with Relic Link API "
+authors = ["LibreMatch Team <info@librematch.org>"]
+license = "AGPL-3.0-or-later"
+readme = "README.md"
+
+packages = [{ include = "poc_steam_auth" }, { include = "poc_steam_proxy" }]
+
+[tool.poetry.scripts]
+psp = "poc_steam_proxy:main"
+
+[tool.poetry.dependencies]
+gevent = "=21.8.0"
+python = "^3.9"
+requests = "^2.27.1"
+steam = { extras = ["client"], version = "^1.2.0" }
+python-dotenv = "^0.19.2"
+protobuf = "^3.19.5"
+aiohttp = "^3.8.1"
+asyncio-gevent = "^0.2.0"
+
+[tool.poetry.dev-dependencies]
+poetry = "^1.1.12"
+flake8 = "^4.0.1"
+bandit = "^1.7.2"
+black = { version = "^22.1.0", allow-prereleases = true }
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
