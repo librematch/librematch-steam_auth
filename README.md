@@ -31,7 +31,9 @@ Create `api_keys.json` with a list of api keys for authentication against the pr
 }
 ```
 
-Then ask team members for the steam 2FA secrets file `steam_secrets.json` and put it into project root.
+If you are a member of LibreMatch team, ask members for the steam 2FA secrets file `steam_secrets.json` and put it into project root.
+
+Otherwise use the `enable-2fa.py` script to generate your own `steam_secrets.json` file.
 
 Finally run `poetry install`.
 
