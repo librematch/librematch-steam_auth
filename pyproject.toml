@@ -14,7 +14,7 @@ psp = "poc_steam_proxy:main"
 [tool.poetry.dependencies]
 gevent = "=21.8.0"
 python = "^3.9"
-requests = "^2.27.1"
+requests = "^2.31.0"
 steam = { extras = ["client"], version = "^1.2.0" }
 python-dotenv = "^0.19.2"
 protobuf = "^3.19.5"
