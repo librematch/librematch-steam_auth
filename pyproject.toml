@@ -12,7 +12,7 @@ packages = [{ include = "poc_steam_auth" }, { include = "poc_steam_proxy" }]
 psp = "poc_steam_proxy:main"
 
 [tool.poetry.dependencies]
-gevent = "=21.8.0"
+gevent = "=23.9.0"
 python = "^3.9"
 requests = "^2.31.0"
 steam = { extras = ["client"], version = "^1.2.0" }
