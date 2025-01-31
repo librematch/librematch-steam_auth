@@ -10,7 +10,6 @@ import logging
 asyncio.set_event_loop_policy(asyncio_gevent.EventLoopPolicy())
 
 from steam.client import SteamClient  # noqa
-from steam.guard import SteamAuthenticator  # noqa
 
 import aiohttp.client_exceptions  # noqa
 from aiohttp import ClientSession, web  # noqa
@@ -26,6 +25,8 @@ import datetime  # noqa
 
 # GAME IDs
 APPID = (813780, "age2")
+
+load_dotenv()
 
 def get_package_dir():
     try:
@@ -58,7 +59,7 @@ class LoginError(BaseException):
 
 class RelicLinkProxy:
     def __init__(
-        self, account_name, password, host="https://aoe-api.worldsedgelink.com/"
+        self, account_name, password, api_key_json_path=None, host="https://aoe-api.worldsedgelink.com/"
     ):
         # set up logging
         self.logger = self._setup_logging()
@@ -69,7 +70,7 @@ class RelicLinkProxy:
         self.steam_password = password
 
         # set up proxy
-        with open(os.path.join(get_package_dir(), "api_keys.json.sample")) as api_keys_file:
+        with open(api_key_json_path or os.path.join(get_package_dir(), "api_keys.json")) as api_keys_file:
             self.api_keys = json.load(api_keys_file).values()
 
         self.webapp = None
@@ -300,17 +301,16 @@ class RelicLinkProxy:
 
 
 async def run():
-    load_dotenv()
-
     # Environment
     account_name = os.getenv("STEAM_ACCOUNT_NAME")
     password = os.getenv("STEAM_PASSWORD")  # TODO: Set environment variable
+    api_key_json_path = os.getenv("API_KEY_JSON_PATH")
 
     if not account_name or not password:
         print("Account data missing. Please set your account data in the .env file!")
         sys.exit(1)
 
-    proxy = RelicLinkProxy(account_name, password)
+    proxy = RelicLinkProxy(account_name, password, api_key_json_path)
     await proxy.steam_login()
     await asyncio.gather(*[proxy.run_server(), proxy.update_token()])
 

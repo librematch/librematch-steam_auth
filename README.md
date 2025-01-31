@@ -24,9 +24,11 @@ Run `uv sync` to install all dependencies within a virtual environment for this 
 
 ### Setup
 
-Create `api_keys.json` with a list of api keys for authentication against the proxy. For development you can use:
+Rename the `api_keys.json.sample` in the `poc_steam_proxy/` directory to `api_keys.json` with a list of api keys for authentication against the proxy.
 
-`api_keys.json`
+For development you can use:
+
+`api_keys.json`:
 
 ```json
 {
@@ -34,6 +36,8 @@ Create `api_keys.json` with a list of api keys for authentication against the pr
   "dev2": "DEV2_API_KEY"
 }
 ```
+
+**NOTE**: Set the path to the `api_keys.json` in the `.env` file as `API_KEY_JSON_PATH` if you want to store the keys in a different location.
 
 > ⚠️ **Note**: Two-factor authentication (2FA) is currently not supported.
 > The project uses basic username/password authentication.
