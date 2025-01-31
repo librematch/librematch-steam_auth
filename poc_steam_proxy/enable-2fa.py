@@ -1,10 +1,31 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+"""
+DEPRECATED: This script is no longer functional as Steam Guard and 2FA authentication
+are not working with the current steam library version. Please use basic username/password
+authentication instead.
+
+For security, it's recommended to:
+1. Create a separate Steam account dedicated to API access
+2. Gift the required game to this account
+3. Use a strong password
+4. Store credentials securely
+"""
+
 import json
 import os
-
+import sys
+import warnings
 from dotenv import load_dotenv
 from steam.guard import SteamAuthenticator, MobileWebAuth
+
+# Emit deprecation warning
+warnings.warn(
+    "This script is deprecated as Steam Guard and 2FA authentication are no longer "
+    "supported. Please use basic username/password authentication instead.",
+    DeprecationWarning,
+    stacklevel=2,
+)
 
 load_dotenv()
 
@@ -13,6 +34,13 @@ ACCOUNT_NAME = os.getenv("STEAM_ACCOUNT_NAME")
 
 
 def main():
+    print("WARNING: This script is deprecated and will not work as expected.")
+    print("Please use basic username/password authentication instead.\n")
+
+    # wait for user input
+    input("Press Enter to continue...")
+    sys.exit(0)
+
     wa = MobileWebAuth(ACCOUNT_NAME)
     wa.cli_login()
 

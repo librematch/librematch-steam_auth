@@ -2,21 +2,25 @@
 
 ## Usage
 
-Rename the `.env.sample` to `.env` and set your Steam account to log into.
-Set your password in an environment variable as well, please don't use `.env` for it
-as it might happen that you push this password to this repository.
+Rename the `.env.sample` to `.env` and set your Steam account credentials.
+For security reasons, it's strongly recommended to:
+
+1. Create a separate Steam account dedicated to API access
+2. Gift the required game to this account
+3. Use a strong password
+4. Set the password in an environment variable rather than in `.env` to avoid accidental commits
 
 Now follow the instructions under development.
 
 ## Development
 
-### Install poetry
+### Install uv
 
-Follow the installation instructions on the [official website](https://python-poetry.org/docs/#installation)
+Follow the installation instructions of the [official repository](https://github.com/astral-sh/uv/?tab=readme-ov-file#installation)
 
 ### Install dependencies
 
-Run `poetry install` to install all dependencies within a virtual environment for this project.
+Run `uv sync` to install all dependencies within a virtual environment for this project.
 
 ### Setup
 
@@ -31,15 +35,13 @@ Create `api_keys.json` with a list of api keys for authentication against the pr
 }
 ```
 
-If you are a member of LibreMatch team, ask members for the steam 2FA secrets file `steam_secrets.json` and put it into project root.
-
-Otherwise use the `enable-2fa.py` script to generate your own `steam_secrets.json` file.
-
-Finally run `poetry install`.
+> ⚠️ **Note**: Two-factor authentication (2FA) is currently not supported.
+> The project uses basic username/password authentication.
+> The `enable-2fa.py` script and related 2FA functionality are deprecated.
 
 ### Start
 
-To start the proxy server run `poetry run psp`.
+To start the proxy server run `uv run psp`.
 
 Then you can make calls to the proxy e.g. for endpoint `/game/news/getNews` call:
 

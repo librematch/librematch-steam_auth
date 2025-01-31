@@ -1,0 +1,19 @@
+[project]
+name = "poc-steam-proxy"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "aiohttp~=3.9.0",
+    "asyncio-gevent~=0.2.0",
+    "gevent==23.9.0",
+    "protobuf~=3.19.5",
+    "python-dotenv~=0.19.2",
+    "requests~=2.31.0",
+    "steam[client]==1.2.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

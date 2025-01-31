@@ -1,32 +1,40 @@
-[tool.poetry]
+[project]
 name = "librematch_steam_auth"
-version = "0.1.0"
+version = "0.2.0"
 description = "Steam authentication proxy for use with Relic Link API "
-authors = ["LibreMatch Team <info@librematch.org>"]
+author = "LibreMatch Team <info@librematch.org>"
 license = "AGPL-3.0-or-later"
 readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "aiohttp~=3.9.0",
+    "asyncio-gevent~=0.2.0",
+    "gevent==23.9.0",
+    "protobuf~=3.19.5",
+    "python-dotenv~=0.19.2",
+    "requests~=2.31.0",
+    "steam[client]==1.2.0",
+]
 
-packages = [{ include = "poc_steam_auth" }, { include = "poc_steam_proxy" }]
-
-[tool.poetry.scripts]
+[project.scripts]
 psp = "poc_steam_proxy:main"
 
-[tool.poetry.dependencies]
-gevent = "=23.9.0"
-python = "^3.9"
-requests = "^2.31.0"
-steam = { extras = ["client"], version = "^1.2.0" }
-python-dotenv = "^0.19.2"
-protobuf = "^3.19.5"
-aiohttp = "^3.9.0"
-asyncio-gevent = "^0.2.0"
+[tool.uv.sources]
+poc_steam_proxy = { workspace = true }
 
-[tool.poetry.dev-dependencies]
-poetry = "^1.1.12"
-flake8 = "^4.0.1"
-bandit = "^1.7.2"
-black = { version = "^22.1.0", allow-prereleases = true }
+[tool.uv.workspace]
+members = ["poc_steam_proxy"]
+
+[tool.uv]
+package = true
+
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[dependency-groups]
+dev = ["bandit>=1.8.2", "black>=25.1.0", "flake8>=7.1.1"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["poc_steam_proxy"]
